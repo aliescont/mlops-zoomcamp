@@ -60,6 +60,7 @@ We want to bring this to workflow orchestration to add observability around it. 
 * `prepare_features`
 * `train_model`
 * `run_model`
+Answer: 'train_model'
 
 Important: change all `print` statements to use the Prefect logger. Using the `print` statement will not appear in the Prefect UI. You have to call `get_run_logger` at the start of the task to use it.
 
@@ -119,6 +120,7 @@ The validation MSE is:
 * 12.037
 * 12.237
 
+Answer: 11.63
 ## Q3. Saving the model and artifacts
 
 At the moment, we are not saving the model and vectorizer for future use. You don't need a new task for this, you can just add it inside the `flow`. The requirements for filenames to save it as were mentioned in the Motivation section. They are pasted again here:
@@ -141,6 +143,7 @@ What is the file size of the `DictVectorizer` that we trained when the `date` is
 * 33,000 bytes 
 * 43,000 bytes 
 
+Answer: 13000 bytes
 You can bring up the Orion UI and see the work you've been doing. If you are using local Orion, you can start the server with:
 
 ```bash
@@ -180,6 +183,8 @@ How many flow runs are scheduled by Prefect in advance? You should not be counti
 * 10
 * 25
 
+3
+
 ## Q6. Creating a work-queue
 
 In order to run this flow, you will need an agent and a work queue. Because we scheduled our flow on every month, it won't really get picked up by an agent. For this exercise, create a work-queue from the UI and view it using the CLI. 
@@ -198,7 +203,7 @@ What is the command to view the available work-queues?
 * `prefect work-queue preview`
 * `prefect work-queue list`
 
-
+prefect work-queue ls
 
 ## Submit the results
 

@@ -106,4 +106,17 @@ def main(date="2021-08-15"):
     with open(f"/home/ubuntu/Github/mlops-zoomcamp/03-orchestration/model/dv-{date}.b", 'wb') as d_out:
         pickle.dump((dv), d_out)
 
-main()
+from prefect.deployments import DeploymentSpec
+from prefect.orion.schemas.schedules import CronSchedule
+from prefect.flow_runners import SubprocessFlowRunner
+
+DeploymentSpec(
+    flow=main,
+    name="cron-schedule-deployment",
+    schedule=CronSchedule(
+        cron="0 9 15  * *",
+        timezone="America/New_York"),
+    flow_storage="13470fc7-344c-4d66-a3ba-06be64426fcc",
+    flow_runner=SubprocessFlowRunner(),
+    tags =["mlops", "schedule"]
+)
