@@ -139,6 +139,7 @@ for April 2021?
 * 25.96
 * 36.55
 
+Answer: 9.96
 
 ## Bonus: upload the result to the cloud (Not graded)
 

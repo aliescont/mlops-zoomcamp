@@ -10,26 +10,20 @@ def load_model():
 
 def read_data(filename):
     df = pd.read_parquet(filename)
-    print("file read")
-    
-    
+
     df['duration'] = df.dropOff_datetime - df.pickup_datetime
     df['duration'] = df.duration.dt.total_seconds() / 60
     
     df = df[(df.duration >= 1) & (df.duration <= 60)].copy()
 
     df[categorical] = df[categorical].fillna(-1).astype('int').astype('str')
-    print("features added")
 
     return df
 
 def predict(year, month):
-    print(f"data file is https://nyc-tlc.s3.amazonaws.com/trip+data/fhv_tripdata_{year:04d}-{month:02d}")
-
     df = read_data(f'https://nyc-tlc.s3.amazonaws.com/trip+data/fhv_tripdata_{year:04d}-{month:02d}.parquet')
 
     (dv, model) = load_model()
-    print("model loaded")
 
     dicts = df[categorical].to_dict(orient='records')
     X_val = dv.transform(dicts)
@@ -37,7 +31,7 @@ def predict(year, month):
 
     df_result = pd.DataFrame()
     df_result['ride_id'] = f'{year:04d}/{month:02d}_' + df.index.astype('str')
-    print("final df to parquet")
+   
     df_result.to_parquet(
         f'df_results{year:04d}-{month:02d}.parquet',
         engine='pyarrow',
@@ -61,7 +55,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     categorical = ['PUlocationID', 'DOlocationID']
 
-
-    print(np.mean(predict(int(args.year), int(args.month))))
+    mean_pred = np.mean(predict(int(args.year), int(args.month)))
+    print(f"Mean predicted duration for {args.year}-{args.month} is :",mean_pred)
 
 
