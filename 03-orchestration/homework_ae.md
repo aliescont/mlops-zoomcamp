@@ -183,7 +183,7 @@ How many flow runs are scheduled by Prefect in advance? You should not be counti
 * 10
 * 25
 
-3
+**Note:** Your answer may be off by 1. It's okay. Select the option closest to your answer.
 
 ## Q6. Creating a work-queue
 
@@ -218,4 +218,5 @@ The deadline for submitting is 13 June 2022 (Monday) 23:00 CEST. After that, the
 
 ## Solution
 
-After the deadline, we'll post the solution here
+* [Code - `homework_solution.py`](homework_solution.py)
+* [Video](https://www.youtube.com/watch?v=DfmRb7J-Wuw)
